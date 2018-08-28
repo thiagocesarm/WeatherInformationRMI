@@ -7,7 +7,7 @@ public class WeatherCentral implements IWeatherCentral {
     
     @Override
     public String getWeatherInfoByCity(String cityName) throws RemoteException {
-        return "";
+        return "451 ºF";
     }
     
 }
