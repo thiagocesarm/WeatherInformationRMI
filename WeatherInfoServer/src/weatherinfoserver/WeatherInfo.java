@@ -15,10 +15,6 @@ public class WeatherInfo implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	public WeatherInfo(String city) {
-		this.city = city;
-	}
-	
 	public WeatherInfo(CurrentWeather data) {
 		this.initializeWeather(data.getMainData(), data.getWeatherList().get(0),
 				data.getWindData(), data.getCloudData());
@@ -41,6 +37,9 @@ public class WeatherInfo implements Serializable{
 		this.cityLon = cityData.getCoordData().getLongitude();
 	}
 	
+	public WeatherInfo() {
+	}
+
 	private void initializeWeather(Main mainData, Weather weatherData, 
 			Wind windData, Cloud cloudData) {
 		this.temp = new Temperature(mainData.getTemp());

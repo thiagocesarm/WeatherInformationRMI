@@ -14,7 +14,7 @@ public class WeatherCentral extends UnicastRemoteObject implements IWeatherCentr
 
 	@Override
 	public WeatherInfo getCurrentWeatherInfo(String cityName) throws RemoteException {
-		return new WeatherInfo(cityName);
+		return new WeatherInfo();
 	}
     
 }
