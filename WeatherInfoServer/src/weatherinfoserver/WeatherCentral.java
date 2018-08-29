@@ -1,13 +1,20 @@
 package weatherinfoserver;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
-public class WeatherCentral implements IWeatherCentral {
-    final private String apiKey = "785d7d7d943ffc783b0e903610246440";
-    
-    @Override
-    public String getWeatherInfoByCity(String cityName) throws RemoteException {
-        return "451 ºF";
-    }
+@SuppressWarnings("serial")
+public class WeatherCentral extends UnicastRemoteObject implements IWeatherCentral {
+	protected WeatherCentral() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	final private String apiKey = "785d7d7d943ffc783b0e903610246440";
+
+	@Override
+	public WeatherInfo getCurrentWeatherInfo(String cityName) throws RemoteException {
+		return new WeatherInfo(cityName);
+	}
     
 }

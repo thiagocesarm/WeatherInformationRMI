@@ -5,5 +5,5 @@ import java.rmi.RemoteException;
 
 public interface IWeatherCentral extends Remote {
     
-    public String getWeatherInfoByCity(String cityName) throws RemoteException;
+    public WeatherInfo getCurrentWeatherInfo(String cityName) throws RemoteException;
 }

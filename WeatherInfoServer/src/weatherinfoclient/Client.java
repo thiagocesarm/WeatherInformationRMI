@@ -1,14 +1,18 @@
 package weatherinfoclient;
 
 import java.net.MalformedURLException;
-import weatherinfoserver.IWeatherCentral;
+
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
+import weatherinfoserver.IWeatherCentral;
+import weatherinfoserver.WeatherInfo;
+
 public class Client {
     public static void main(String[] args) throws NotBoundException, MalformedURLException, RemoteException {
         IWeatherCentral stub = (IWeatherCentral) Naming.lookup("rmi://localhost/WeatherCentral");
-        System.out.println(stub.getWeatherInfoByCity("Caicó"));
+        WeatherInfo w = stub.getCurrentWeatherInfo("Los Angeles");
+        System.out.println(w);
     }
 }
