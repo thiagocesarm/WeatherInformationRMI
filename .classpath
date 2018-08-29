@@ -6,5 +6,12 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/Users/carlosv/eclipse-workspace/weather/libs/converter-gson-2.4.0.jar"/>
+	<classpathentry kind="lib" path="/Users/carlosv/eclipse-workspace/weather/libs/gson-2.8.5.jar"/>
+	<classpathentry kind="lib" path="/Users/carlosv/eclipse-workspace/weather/libs/kotlin-stdlib-1.2.61.jar"/>
+	<classpathentry kind="lib" path="/Users/carlosv/eclipse-workspace/weather/libs/okhttp-3.11.0.jar"/>
+	<classpathentry kind="lib" path="/Users/carlosv/eclipse-workspace/weather/libs/okio-2.0.0.jar"/>
+	<classpathentry kind="lib" path="/Users/carlosv/eclipse-workspace/weather/libs/owm-japis-2.5.2.2.jar"/>
+	<classpathentry kind="lib" path="/Users/carlosv/eclipse-workspace/weather/libs/retrofit-2.4.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
