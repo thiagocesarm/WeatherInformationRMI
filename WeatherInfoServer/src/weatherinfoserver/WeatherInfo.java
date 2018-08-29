@@ -2,6 +2,15 @@ package weatherinfoserver;
 
 import java.io.Serializable;
 
+import net.aksingh.owmjapis.model.param.City;
+import net.aksingh.owmjapis.model.param.Cloud;
+import net.aksingh.owmjapis.model.param.Main;
+import net.aksingh.owmjapis.model.param.Weather;
+import net.aksingh.owmjapis.model.param.WeatherData;
+import net.aksingh.owmjapis.model.param.Wind;
+import net.aksingh.owmjapis.model.CurrentWeather;
+import net.aksingh.owmjapis.model.HourlyWeatherForecast;
+
 public class WeatherInfo implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -10,26 +19,64 @@ public class WeatherInfo implements Serializable{
 		this.city = city;
 	}
 	
-	private String city = "Natal";
-	private double cityLat = 2.32626;
-	private double cityLon = 3.151;
-	private double temp = 32;
-	private double tempMin = 23;
-	private double tempMax = 36;
-	private double pressure = 23.26;
-	private double humidity = 50;
-	private String weatherCondition = "Clouds";
-	private String weatherDescription = "broken clouds";
-	private double windSpeed = 8;
-	private double windDeg = 32;
-	private double cloudiness = 60;
+	public WeatherInfo(CurrentWeather data) {
+		this.initializeWeather(data.getMainData(), data.getWeatherList().get(0),
+				data.getWindData(), data.getCloudData());
+		
+		this.city =  data.getCityName();
+		this.country = data.getSystemData().getCountryCode();
+		this.cityLat = data.getCoordData().getLatitude();
+		this.cityLon = data.getCoordData().getLongitude();
+	}
+	
+	public WeatherInfo(HourlyWeatherForecast data, int idx) {
+		WeatherData wd = data.getDataList().get(idx);
+		this.initializeWeather(wd.getMainData(), wd.getWeatherList().get(0),
+				wd.getWindData(), wd.getCloudData());
+		
+		City cityData = data.getCityData();
+		this.city = cityData.getName();
+		this.country = cityData.getCountryCode();
+		this.cityLat = cityData.getCoordData().getLatitude();
+		this.cityLon = cityData.getCoordData().getLongitude();
+	}
+	
+	private void initializeWeather(Main mainData, Weather weatherData, 
+			Wind windData, Cloud cloudData) {
+		this.temp = new Temperature(mainData.getTemp());
+		this.tempMax = new Temperature(mainData.getTempMax());
+		this.tempMin = new Temperature(mainData.getTempMin());
+		this.pressure = mainData.getPressure();
+		this.humidity = mainData.getHumidity();
+		
+		this.weatherCondition = weatherData.getMainInfo();
+		this.weatherDescription = weatherData.getDescription();
+		
+		this.windSpeed = windData.getSpeed();
+		this.windDeg = windData.getDegree();
+		
+		this.cloudiness = cloudData.getCloud();
+	}
+	
+	private String city, country;
+	private double cityLat, cityLon;
+	private Temperature temp, tempMin, tempMax;
+	private double pressure;
+	private double humidity;
+	private String weatherCondition;
+	private String weatherDescription;
+	private double windSpeed, windDeg;
+	private double cloudiness;
 	
 	@Override
 	public String toString() {
 		String info = "";
-		info += "Weather data from " + city + " (" + cityLat + ", " + cityLon + ")\n";
+		info += "Weather data from " + city + ", " + country +
+				" (" + cityLat + ", " + cityLon + ")\n";
 		info += weatherCondition + " - " + weatherDescription + "\n";
-		info += "Temperature: " + temp + " ºC (max: " + tempMax + "ºC, min: " + tempMin + "ºC)\n";
+		info += "Temperature: " + temp.getCelsius() +
+				" ºC (max: " + tempMax.getCelsius() +
+				"ºC, min: " + tempMin.getCelsius() + "ºC)\n";
 		info += "Pressure: " + pressure + " hPa\n";
 		info += "Humidity: " + humidity + "%\n";
 		info += "Wind: " + windSpeed + " km/h - " + windDeg + "º\n";
