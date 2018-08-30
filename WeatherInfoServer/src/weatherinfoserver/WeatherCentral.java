@@ -17,16 +17,19 @@ public class WeatherCentral extends UnicastRemoteObject implements IWeatherCentr
 	
 	protected WeatherCentral() throws RemoteException {
 		openWeatherMap = new OWM(apiKey);
+		System.out.println("Remote object WeatherCentral constructed.");
 	}
 
 	@Override
 	public WeatherInfo getCurrentWeatherInfo(String cityName) throws RemoteException, APIException {
+		System.out.println("Remote procedure getCurrentWeatherInfo called.");
 		CurrentWeather cwData = openWeatherMap.currentWeatherByCityName(cityName);
 		return new WeatherInfo(cwData);
 	}
 
 	@Override
 	public WeatherInfo getFutureWeatherInfo(String cityName, int numHours) throws RemoteException, APIException, IllegalArgumentException {
+		System.out.println("Remote procedure getFutureWeatherInfo called.");
 		if (numHours < 0) {
 			throw new IllegalArgumentException();
 		}
