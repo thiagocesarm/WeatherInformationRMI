@@ -29,7 +29,7 @@ public class Client {
 				}
 				System.out.println("Please, select the desired data wanted:");
 				System.out.println("1 - Current weather information from " + cityName);
-				System.out.println("2 - Weather information from " + cityName + " in the next hours");
+				System.out.println("2 - Weather information from " + cityName + " in the next five days");
 				option = input.nextInt();
 				input.nextLine();
 				switch (option) {
