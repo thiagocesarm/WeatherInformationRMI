@@ -1,7 +1,11 @@
 package weatherinfoserver;
 
 import java.io.Serializable;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.Date;
+import java.util.Locale;
 
 import net.aksingh.owmjapis.model.param.City;
 import net.aksingh.owmjapis.model.param.Cloud;
@@ -74,13 +78,18 @@ public class WeatherInfo implements Serializable{
 	
 	@Override
 	public String toString() {
+		DecimalFormatSymbols formatSymbols = new DecimalFormatSymbols(Locale.getDefault());
+		formatSymbols.setDecimalSeparator('.');
+		DecimalFormat df = new DecimalFormat("#.##", formatSymbols);
+		df.setRoundingMode(RoundingMode.CEILING);
+		
 		String info = "";
 		info += "Weather data from " + city + ", " + country +
 				" (" + cityLat + ", " + cityLon + ") on " + this.dateTime + "\n";
 		info += weatherCondition + " - " + weatherDescription + "\n";
-		info += "Temperature: " + temp.getCelsius() +
-				" ºC (max: " + tempMax.getCelsius() +
-				"ºC, min: " + tempMin.getCelsius() + "ºC)\n";
+		info += "Temperature: " + df.format(temp.getCelsius()) +
+				" ºC (" + df.format(tempMin.getCelsius()) + " Cº min / " +
+				df.format(tempMax.getCelsius()) + "ºC max)\n";
 		info += "Pressure: " + pressure + " hPa\n";
 		info += "Humidity: " + humidity + "%\n";
 		info += "Wind: " + windSpeed + " km/h - " + windDeg + "º\n";

@@ -42,16 +42,18 @@ public class Client {
 						int hours = input.nextInt();
 						input.nextLine();
 						wInfo = stub.getFutureWeatherInfo(cityName, hours);
-						System.out.println("Weather data from " + hours + " hours in the future");
 						System.out.println(wInfo);
 						break;
 					default:
-						System.out.println("Invalid option, please try again.");
+						System.out.println("Invalid option, please try again.\n");
 				}
 			}
+		} catch (APIException e) {
+			System.out.println("Error fetching weather data!");
+			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		} 
         
     }
 }

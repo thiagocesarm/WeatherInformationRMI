@@ -21,19 +21,27 @@ public class WeatherCentral extends UnicastRemoteObject implements IWeatherCentr
 
 	@Override
 	public WeatherInfo getCurrentWeatherInfo(String cityName) throws RemoteException, APIException {
-		openWeatherMap.setLanguage(Language.PORTUGUESE);
 		CurrentWeather cwData = openWeatherMap.currentWeatherByCityName(cityName);
 		return new WeatherInfo(cwData);
 	}
 
 	@Override
-	public WeatherInfo getFutureWeatherInfo(String cityName, int numHours) throws RemoteException, APIException {
-		int threeHourInterval = numHours / 3;
-		if (threeHourInterval > 0) {
-			threeHourInterval -= 1; 
+	public WeatherInfo getFutureWeatherInfo(String cityName, int numHours) throws RemoteException, APIException, IllegalArgumentException {
+		if (numHours < 0) {
+			throw new IllegalArgumentException();
 		}
+		
+		int threeHourIntervalIndex = numHours / 3;
+		if (threeHourIntervalIndex == 0) {
+			return getCurrentWeatherInfo(cityName);
+		}
+		
+		threeHourIntervalIndex -= 1; // first 3 hour interval is index 0
 		HourlyWeatherForecast hwData = openWeatherMap.hourlyWeatherForecastByCityName(cityName);
-		return new WeatherInfo(hwData, threeHourInterval);
+		if (threeHourIntervalIndex >= hwData.getDataCount()) {
+			throw new IllegalArgumentException("Mumber of hour interval exceeds maximum from array");
+		}
+		return new WeatherInfo(hwData, threeHourIntervalIndex);
 	}
     
 }
