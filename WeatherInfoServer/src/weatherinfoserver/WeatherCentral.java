@@ -39,7 +39,7 @@ public class WeatherCentral extends UnicastRemoteObject implements IWeatherCentr
 		threeHourIntervalIndex -= 1; // first 3 hour interval is index 0
 		HourlyWeatherForecast hwData = openWeatherMap.hourlyWeatherForecastByCityName(cityName);
 		if (threeHourIntervalIndex >= hwData.getDataCount()) {
-			throw new IllegalArgumentException("Mumber of hour interval exceeds maximum from array");
+			throw new IllegalArgumentException("Number of hours exceeds maximum of 5 days forecast");
 		}
 		return new WeatherInfo(hwData, threeHourIntervalIndex);
 	}
