@@ -88,8 +88,8 @@ public class WeatherInfo implements Serializable{
 				" (" + cityLat + ", " + cityLon + ") on " + this.dateTime + "\n";
 		info += weatherCondition + " - " + weatherDescription + "\n";
 		info += "Temperature: " + df.format(temp.getCelsius()) +
-				" ºC (" + df.format(tempMin.getCelsius()) + " Cº min / " +
-				df.format(tempMax.getCelsius()) + "ºC max)\n";
+				" ºC (" + df.format(tempMin.getCelsius()) + " ºC min / " +
+				df.format(tempMax.getCelsius()) + " ºC max)\n";
 		info += "Pressure: " + pressure + " hPa\n";
 		info += "Humidity: " + humidity + "%\n";
 		info += "Wind: " + windSpeed + " km/h - " + windDeg + "º\n";
