@@ -38,7 +38,7 @@ public class Client {
 						System.out.println(wInfo);
 						break;
 					case 2:
-						System.out.println("Input the number of hours in the future you want to know weather data:");
+						System.out.println("Input how many hours ahead you want your forecast to be:");
 						int hours = input.nextInt();
 						input.nextLine();
 						wInfo = stub.getFutureWeatherInfo(cityName, hours);
