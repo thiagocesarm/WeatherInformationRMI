@@ -10,7 +10,7 @@ public class WeatherInfoServer {
         // Execução do modulo de referencia remota (RMI Registry)
         LocateRegistry.createRegistry(1099);
 
-        // Instanciacao do servene
+        // Instanciacao do servente
         WeatherCentral weatherCentral = new WeatherCentral();
 
         // Registro do servente no modulo de referencia remota (RMI Registry)
