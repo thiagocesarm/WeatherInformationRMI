@@ -33,11 +33,11 @@ public class Client {
 				option = input.nextInt();
 				input.nextLine();
 				switch (option) {
-					case 1: // Adicao
+					case 1:
 						wInfo = stub.getCurrentWeatherInfo(cityName);
 						System.out.println(wInfo);
 						break;
-					case 2: // Subtracao
+					case 2:
 						System.out.println("Input the number of hours in the future you want to know weather data:");
 						int hours = input.nextInt();
 						input.nextLine();
