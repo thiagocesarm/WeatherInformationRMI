@@ -1,6 +1,7 @@
 package weatherinfoserver;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import net.aksingh.owmjapis.model.param.City;
 import net.aksingh.owmjapis.model.param.Cloud;
@@ -19,8 +20,10 @@ public class WeatherInfo implements Serializable{
 		this.initializeWeather(data.getMainData(), data.getWeatherList().get(0),
 				data.getWindData(), data.getCloudData());
 		
+		
 		this.city =  data.getCityName();
 		this.country = data.getSystemData().getCountryCode();
+		this.dateTime = data.getDateTime();
 		this.cityLat = data.getCoordData().getLatitude();
 		this.cityLon = data.getCoordData().getLongitude();
 	}
@@ -33,6 +36,7 @@ public class WeatherInfo implements Serializable{
 		City cityData = data.getCityData();
 		this.city = cityData.getName();
 		this.country = cityData.getCountryCode();
+		this.dateTime = wd.getDateTime();
 		this.cityLat = cityData.getCoordData().getLatitude();
 		this.cityLon = cityData.getCoordData().getLongitude();
 	}
@@ -59,6 +63,7 @@ public class WeatherInfo implements Serializable{
 	
 	private String city, country;
 	private double cityLat, cityLon;
+	private Date dateTime;
 	private Temperature temp, tempMin, tempMax;
 	private double pressure;
 	private double humidity;
@@ -71,7 +76,7 @@ public class WeatherInfo implements Serializable{
 	public String toString() {
 		String info = "";
 		info += "Weather data from " + city + ", " + country +
-				" (" + cityLat + ", " + cityLon + ")\n";
+				" (" + cityLat + ", " + cityLon + ") on " + this.dateTime + "\n";
 		info += weatherCondition + " - " + weatherDescription + "\n";
 		info += "Temperature: " + temp.getCelsius() +
 				" ºC (max: " + tempMax.getCelsius() +
